@@ -8,7 +8,7 @@ namespace Server // NOTE: IN THIS CASE -> I use .NET 6 with .NET 5 template.
     class Program
     {
         const int port = 8080;
-        static TcpListener listener;
+        static TcpListener? listener;
         static void Main(string[] args)
         {
             try
@@ -19,7 +19,6 @@ namespace Server // NOTE: IN THIS CASE -> I use .NET 6 with .NET 5 template.
 
                 while (true)
                 {
-                    Console.WriteLine("Соединения установлено");
                     TcpClient client = listener.AcceptTcpClient();
                     ServerLogic serverLogic = new ServerLogic(client);
 
