@@ -31,6 +31,41 @@ namespace Client
                     Console.WriteLine("8. Тестирование победы");
                     Console.WriteLine("7. Выход\n");
 
+
+                    //ввод сообщения
+                    //message input
+
+                    string message = Console.ReadLine();
+                    if (message != null && message != "7")
+                    {
+                        message = String.Format("{0}", message);
+                        //преобразуем сообщение в массив байтов //message to byte
+                        byte[] data = Encoding.Unicode.GetBytes(message);
+
+                        //отправка сообщения  //message send
+                        stream.Write(data, 0, data.Length);
+
+                        //получаем ответ //message get
+                        data = new byte[data.Length];
+                        StringBuilder builder = new StringBuilder();
+                        int bytes = 0;
+                        do
+                        {
+                            bytes = stream.Read(data,0,data.Length);
+                            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        }
+                        while (stream.DataAvailable);
+
+                        message = builder.ToString();
+                        Console.WriteLine("Ответ от сервера:\n{0}", message);
+
+                    }
+                    else
+                    {
+                        client.Close();
+                        System.Environment.Exit(1);
+                    }
+
                 }
             }
             catch(Exception ex)
