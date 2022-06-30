@@ -16,11 +16,10 @@ namespace Client
             {
                 client = new TcpClient(address, port);
                 NetworkStream stream = client.GetStream();
-
-                while(true)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Успешное подключение к серверу.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Успешное подключение к серверу.");
+                while (true)
+                { 
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("1. Набрать воду в трёхлитровое ведро");
                     Console.WriteLine("2. Набрать воду в пятилитровое ведро");
